@@ -28,7 +28,12 @@ function Accordion({ data }) {
   return (
     <div className="accordion">
       {data.map((el, i) => (
-        <AccordionItem title={el.title} text={el.text} num={i + 1} />
+        <AccordionItem
+          title={el.title}
+          text={el.text}
+          num={i + 1}
+          key={el.title}
+        />
       ))}
     </div>
   );
@@ -41,9 +46,9 @@ function AccordionItem({ num, title, text }) {
     setIsOpen((isOpen) => !isOpen);
   }
   return (
-    <div className="item" onClick={handleToggle}>
+    <div className={`item ${isOpen ? "open" : ""}`} onClick={handleToggle}>
       <p className="number">{num < 9 ? `0${num}` : num}</p>
-      <p className="text">{title}</p>
+      <p className="title">{title}</p>
       <p className="icon">{isOpen ? "-" : "+"}</p>
 
       {isOpen && <div className="content-box">{text}</div>}
